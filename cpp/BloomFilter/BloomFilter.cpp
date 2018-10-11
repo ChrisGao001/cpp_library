@@ -1,5 +1,5 @@
 //
-// Created by 高玉敏 on 18/10/11.
+// Created by YuminGao on 18/10/11.
 //
 
 #include "BloomFilter.h"
