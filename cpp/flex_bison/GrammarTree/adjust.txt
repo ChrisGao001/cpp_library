@@ -1,0 +1,9 @@
+query "美东遗尿停胶囊" { do position += 10000 WHEN flags == 4096 and flags == 4194304 and wareid == 1023423;}
+query "贝唐宁" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "同仁堂清瘟解毒丸" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "齐鲁氯氮平片" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "久美十一味维命胶囊" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "十一味维命胶囊" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "奥博林奥硝唑胶囊" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "力贝尔乳酸司帕沙星片" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
+query "迪诺蚁灵口服液" { do position += 10000 WHEN flags == 4096 and flags == 4194304;}
