@@ -1,0 +1,679 @@
+Terminals unused in grammar
+
+   IDENT
+   DOUBLE
+   LPAREN
+   RPAREN
+   TOC_UNKNOWN
+
+
+Grammar
+
+    0 $accept: Input END
+
+    1 Input: Modules
+    2      | %empty
+
+    3 Modules: Modules Module
+    4        | Module
+
+    5 Module: QueryModule
+    6       | HcCidModule
+    7       | AllModule
+
+    8 QueryModule: QUERY String LBRACE Stmts RBRACE
+
+    9 HcCidModule: HC_CID Integer LBRACE Stmts RBRACE
+
+   10 AllModule: ALL LBRACE Stmts RBRACE
+
+   11 Stmts: Stmts SEMICOLON Stmt
+   12      | Stmt
+
+   13 Stmt: WhenStmt
+   14     | %empty
+
+   15 WhenStmt: DO AuxAssign WHEN ConditionExpr
+   16         | DO AuxAssign WHEN ConditionExpr LimitRange
+   17         | DO AuxAssign WHEN ConditionExpr LimitRange MTEST String
+   18         | DO AuxAssign WHEN ConditionExpr MTEST String
+
+   19 LimitRange: LIMIT Integer
+   20           | LIMIT Integer COMMA Integer
+
+   21 AuxAssign: KEYWORD AuxAssignOp Integer
+
+   22 ConditionExpr: ConditionExpr AND Condition
+   23              | Condition
+
+   24 Condition: KEYWORD CompOp Integer
+
+   25 AuxAssignOp: ADD_ASSIGN
+   26            | SUB_ASSIGN
+   27            | MUL_ASSIGN
+   28            | ASSIGN
+
+   29 CompOp: LE_OP
+   30       | GE_OP
+   31       | EQ_OP
+   32       | NE_OP
+   33       | LT_OP
+   34       | GT_OP
+
+   35 Integer: INTEGER
+
+   36 String: STRING
+
+
+Terminals, with rules where they appear
+
+END (0) 0
+error (256)
+DO (258) 15 16 17 18
+WHEN (259) 15 16 17 18
+AND (260) 22
+LIMIT (261) 19 20
+MTEST (262) 17 18
+IDENT (263)
+STRING (264) 36
+DOUBLE (265)
+INTEGER (266) 35
+KEYWORD (267) 21 24
+QUERY (268) 8
+HC_CID (269) 9
+ALL (270) 10
+LPAREN (271)
+RPAREN (272)
+LBRACE (273) 8 9 10
+RBRACE (274) 8 9 10
+SEMICOLON (275) 11
+COMMA (276) 20
+TOC_UNKNOWN (277)
+ADD_ASSIGN (278) 25
+SUB_ASSIGN (279) 26
+MUL_ASSIGN (280) 27
+ASSIGN (281) 28
+LE_OP (282) 29
+GE_OP (283) 30
+EQ_OP (284) 31
+NE_OP (285) 32
+LT_OP (286) 33
+GT_OP (287) 34
+
+
+Nonterminals, with rules where they appear
+
+$accept (33)
+    on left: 0
+Input (34)
+    on left: 1 2, on right: 0
+Modules (35)
+    on left: 3 4, on right: 1 3
+Module (36)
+    on left: 5 6 7, on right: 3 4
+QueryModule (37)
+    on left: 8, on right: 5
+HcCidModule (38)
+    on left: 9, on right: 6
+AllModule (39)
+    on left: 10, on right: 7
+Stmts (40)
+    on left: 11 12, on right: 8 9 10 11
+Stmt (41)
+    on left: 13 14, on right: 11 12
+WhenStmt (42)
+    on left: 15 16 17 18, on right: 13
+LimitRange (43)
+    on left: 19 20, on right: 16 17
+AuxAssign (44)
+    on left: 21, on right: 15 16 17 18
+ConditionExpr (45)
+    on left: 22 23, on right: 15 16 17 18 22
+Condition (46)
+    on left: 24, on right: 22 23
+AuxAssignOp (47)
+    on left: 25 26 27 28, on right: 21
+CompOp (48)
+    on left: 29 30 31 32 33 34, on right: 24
+Integer (49)
+    on left: 35, on right: 9 19 20 21 24
+String (50)
+    on left: 36, on right: 8 17 18
+
+
+State 0
+
+    0 $accept: . Input END
+
+    QUERY   shift, and go to state 1
+    HC_CID  shift, and go to state 2
+    ALL     shift, and go to state 3
+
+    $default  reduce using rule 2 (Input)
+
+    Input        go to state 4
+    Modules      go to state 5
+    Module       go to state 6
+    QueryModule  go to state 7
+    HcCidModule  go to state 8
+    AllModule    go to state 9
+
+
+State 1
+
+    8 QueryModule: QUERY . String LBRACE Stmts RBRACE
+
+    STRING  shift, and go to state 10
+
+    String  go to state 11
+
+
+State 2
+
+    9 HcCidModule: HC_CID . Integer LBRACE Stmts RBRACE
+
+    INTEGER  shift, and go to state 12
+
+    Integer  go to state 13
+
+
+State 3
+
+   10 AllModule: ALL . LBRACE Stmts RBRACE
+
+    LBRACE  shift, and go to state 14
+
+
+State 4
+
+    0 $accept: Input . END
+
+    END  shift, and go to state 15
+
+
+State 5
+
+    1 Input: Modules .
+    3 Modules: Modules . Module
+
+    QUERY   shift, and go to state 1
+    HC_CID  shift, and go to state 2
+    ALL     shift, and go to state 3
+
+    $default  reduce using rule 1 (Input)
+
+    Module       go to state 16
+    QueryModule  go to state 7
+    HcCidModule  go to state 8
+    AllModule    go to state 9
+
+
+State 6
+
+    4 Modules: Module .
+
+    $default  reduce using rule 4 (Modules)
+
+
+State 7
+
+    5 Module: QueryModule .
+
+    $default  reduce using rule 5 (Module)
+
+
+State 8
+
+    6 Module: HcCidModule .
+
+    $default  reduce using rule 6 (Module)
+
+
+State 9
+
+    7 Module: AllModule .
+
+    $default  reduce using rule 7 (Module)
+
+
+State 10
+
+   36 String: STRING .
+
+    $default  reduce using rule 36 (String)
+
+
+State 11
+
+    8 QueryModule: QUERY String . LBRACE Stmts RBRACE
+
+    LBRACE  shift, and go to state 17
+
+
+State 12
+
+   35 Integer: INTEGER .
+
+    $default  reduce using rule 35 (Integer)
+
+
+State 13
+
+    9 HcCidModule: HC_CID Integer . LBRACE Stmts RBRACE
+
+    LBRACE  shift, and go to state 18
+
+
+State 14
+
+   10 AllModule: ALL LBRACE . Stmts RBRACE
+
+    DO  shift, and go to state 19
+
+    $default  reduce using rule 14 (Stmt)
+
+    Stmts     go to state 20
+    Stmt      go to state 21
+    WhenStmt  go to state 22
+
+
+State 15
+
+    0 $accept: Input END .
+
+    $default  accept
+
+
+State 16
+
+    3 Modules: Modules Module .
+
+    $default  reduce using rule 3 (Modules)
+
+
+State 17
+
+    8 QueryModule: QUERY String LBRACE . Stmts RBRACE
+
+    DO  shift, and go to state 19
+
+    $default  reduce using rule 14 (Stmt)
+
+    Stmts     go to state 23
+    Stmt      go to state 21
+    WhenStmt  go to state 22
+
+
+State 18
+
+    9 HcCidModule: HC_CID Integer LBRACE . Stmts RBRACE
+
+    DO  shift, and go to state 19
+
+    $default  reduce using rule 14 (Stmt)
+
+    Stmts     go to state 24
+    Stmt      go to state 21
+    WhenStmt  go to state 22
+
+
+State 19
+
+   15 WhenStmt: DO . AuxAssign WHEN ConditionExpr
+   16         | DO . AuxAssign WHEN ConditionExpr LimitRange
+   17         | DO . AuxAssign WHEN ConditionExpr LimitRange MTEST String
+   18         | DO . AuxAssign WHEN ConditionExpr MTEST String
+
+    KEYWORD  shift, and go to state 25
+
+    AuxAssign  go to state 26
+
+
+State 20
+
+   10 AllModule: ALL LBRACE Stmts . RBRACE
+   11 Stmts: Stmts . SEMICOLON Stmt
+
+    RBRACE     shift, and go to state 27
+    SEMICOLON  shift, and go to state 28
+
+
+State 21
+
+   12 Stmts: Stmt .
+
+    $default  reduce using rule 12 (Stmts)
+
+
+State 22
+
+   13 Stmt: WhenStmt .
+
+    $default  reduce using rule 13 (Stmt)
+
+
+State 23
+
+    8 QueryModule: QUERY String LBRACE Stmts . RBRACE
+   11 Stmts: Stmts . SEMICOLON Stmt
+
+    RBRACE     shift, and go to state 29
+    SEMICOLON  shift, and go to state 28
+
+
+State 24
+
+    9 HcCidModule: HC_CID Integer LBRACE Stmts . RBRACE
+   11 Stmts: Stmts . SEMICOLON Stmt
+
+    RBRACE     shift, and go to state 30
+    SEMICOLON  shift, and go to state 28
+
+
+State 25
+
+   21 AuxAssign: KEYWORD . AuxAssignOp Integer
+
+    ADD_ASSIGN  shift, and go to state 31
+    SUB_ASSIGN  shift, and go to state 32
+    MUL_ASSIGN  shift, and go to state 33
+    ASSIGN      shift, and go to state 34
+
+    AuxAssignOp  go to state 35
+
+
+State 26
+
+   15 WhenStmt: DO AuxAssign . WHEN ConditionExpr
+   16         | DO AuxAssign . WHEN ConditionExpr LimitRange
+   17         | DO AuxAssign . WHEN ConditionExpr LimitRange MTEST String
+   18         | DO AuxAssign . WHEN ConditionExpr MTEST String
+
+    WHEN  shift, and go to state 36
+
+
+State 27
+
+   10 AllModule: ALL LBRACE Stmts RBRACE .
+
+    $default  reduce using rule 10 (AllModule)
+
+
+State 28
+
+   11 Stmts: Stmts SEMICOLON . Stmt
+
+    DO  shift, and go to state 19
+
+    $default  reduce using rule 14 (Stmt)
+
+    Stmt      go to state 37
+    WhenStmt  go to state 22
+
+
+State 29
+
+    8 QueryModule: QUERY String LBRACE Stmts RBRACE .
+
+    $default  reduce using rule 8 (QueryModule)
+
+
+State 30
+
+    9 HcCidModule: HC_CID Integer LBRACE Stmts RBRACE .
+
+    $default  reduce using rule 9 (HcCidModule)
+
+
+State 31
+
+   25 AuxAssignOp: ADD_ASSIGN .
+
+    $default  reduce using rule 25 (AuxAssignOp)
+
+
+State 32
+
+   26 AuxAssignOp: SUB_ASSIGN .
+
+    $default  reduce using rule 26 (AuxAssignOp)
+
+
+State 33
+
+   27 AuxAssignOp: MUL_ASSIGN .
+
+    $default  reduce using rule 27 (AuxAssignOp)
+
+
+State 34
+
+   28 AuxAssignOp: ASSIGN .
+
+    $default  reduce using rule 28 (AuxAssignOp)
+
+
+State 35
+
+   21 AuxAssign: KEYWORD AuxAssignOp . Integer
+
+    INTEGER  shift, and go to state 12
+
+    Integer  go to state 38
+
+
+State 36
+
+   15 WhenStmt: DO AuxAssign WHEN . ConditionExpr
+   16         | DO AuxAssign WHEN . ConditionExpr LimitRange
+   17         | DO AuxAssign WHEN . ConditionExpr LimitRange MTEST String
+   18         | DO AuxAssign WHEN . ConditionExpr MTEST String
+
+    KEYWORD  shift, and go to state 39
+
+    ConditionExpr  go to state 40
+    Condition      go to state 41
+
+
+State 37
+
+   11 Stmts: Stmts SEMICOLON Stmt .
+
+    $default  reduce using rule 11 (Stmts)
+
+
+State 38
+
+   21 AuxAssign: KEYWORD AuxAssignOp Integer .
+
+    $default  reduce using rule 21 (AuxAssign)
+
+
+State 39
+
+   24 Condition: KEYWORD . CompOp Integer
+
+    LE_OP  shift, and go to state 42
+    GE_OP  shift, and go to state 43
+    EQ_OP  shift, and go to state 44
+    NE_OP  shift, and go to state 45
+    LT_OP  shift, and go to state 46
+    GT_OP  shift, and go to state 47
+
+    CompOp  go to state 48
+
+
+State 40
+
+   15 WhenStmt: DO AuxAssign WHEN ConditionExpr .
+   16         | DO AuxAssign WHEN ConditionExpr . LimitRange
+   17         | DO AuxAssign WHEN ConditionExpr . LimitRange MTEST String
+   18         | DO AuxAssign WHEN ConditionExpr . MTEST String
+   22 ConditionExpr: ConditionExpr . AND Condition
+
+    AND    shift, and go to state 49
+    LIMIT  shift, and go to state 50
+    MTEST  shift, and go to state 51
+
+    $default  reduce using rule 15 (WhenStmt)
+
+    LimitRange  go to state 52
+
+
+State 41
+
+   23 ConditionExpr: Condition .
+
+    $default  reduce using rule 23 (ConditionExpr)
+
+
+State 42
+
+   29 CompOp: LE_OP .
+
+    $default  reduce using rule 29 (CompOp)
+
+
+State 43
+
+   30 CompOp: GE_OP .
+
+    $default  reduce using rule 30 (CompOp)
+
+
+State 44
+
+   31 CompOp: EQ_OP .
+
+    $default  reduce using rule 31 (CompOp)
+
+
+State 45
+
+   32 CompOp: NE_OP .
+
+    $default  reduce using rule 32 (CompOp)
+
+
+State 46
+
+   33 CompOp: LT_OP .
+
+    $default  reduce using rule 33 (CompOp)
+
+
+State 47
+
+   34 CompOp: GT_OP .
+
+    $default  reduce using rule 34 (CompOp)
+
+
+State 48
+
+   24 Condition: KEYWORD CompOp . Integer
+
+    INTEGER  shift, and go to state 12
+
+    Integer  go to state 53
+
+
+State 49
+
+   22 ConditionExpr: ConditionExpr AND . Condition
+
+    KEYWORD  shift, and go to state 39
+
+    Condition  go to state 54
+
+
+State 50
+
+   19 LimitRange: LIMIT . Integer
+   20           | LIMIT . Integer COMMA Integer
+
+    INTEGER  shift, and go to state 12
+
+    Integer  go to state 55
+
+
+State 51
+
+   18 WhenStmt: DO AuxAssign WHEN ConditionExpr MTEST . String
+
+    STRING  shift, and go to state 10
+
+    String  go to state 56
+
+
+State 52
+
+   16 WhenStmt: DO AuxAssign WHEN ConditionExpr LimitRange .
+   17         | DO AuxAssign WHEN ConditionExpr LimitRange . MTEST String
+
+    MTEST  shift, and go to state 57
+
+    $default  reduce using rule 16 (WhenStmt)
+
+
+State 53
+
+   24 Condition: KEYWORD CompOp Integer .
+
+    $default  reduce using rule 24 (Condition)
+
+
+State 54
+
+   22 ConditionExpr: ConditionExpr AND Condition .
+
+    $default  reduce using rule 22 (ConditionExpr)
+
+
+State 55
+
+   19 LimitRange: LIMIT Integer .
+   20           | LIMIT Integer . COMMA Integer
+
+    COMMA  shift, and go to state 58
+
+    $default  reduce using rule 19 (LimitRange)
+
+
+State 56
+
+   18 WhenStmt: DO AuxAssign WHEN ConditionExpr MTEST String .
+
+    $default  reduce using rule 18 (WhenStmt)
+
+
+State 57
+
+   17 WhenStmt: DO AuxAssign WHEN ConditionExpr LimitRange MTEST . String
+
+    STRING  shift, and go to state 10
+
+    String  go to state 59
+
+
+State 58
+
+   20 LimitRange: LIMIT Integer COMMA . Integer
+
+    INTEGER  shift, and go to state 12
+
+    Integer  go to state 60
+
+
+State 59
+
+   17 WhenStmt: DO AuxAssign WHEN ConditionExpr LimitRange MTEST String .
+
+    $default  reduce using rule 17 (WhenStmt)
+
+
+State 60
+
+   20 LimitRange: LIMIT Integer COMMA Integer .
+
+    $default  reduce using rule 20 (LimitRange)

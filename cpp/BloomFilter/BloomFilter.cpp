@@ -5,6 +5,7 @@
 #include "BloomFilter.h"
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
 
 using std::string;
 

@@ -1,0 +1,3 @@
+bison -dv mycalc.y
+flex mycalc.l
+gcc -o mycalc mycalc.tab.c lex.yy.c
