@@ -1,6 +1,3 @@
-#ifndef FAST_MATH_H_
-#define FAST_MATH_H_
-
 /*=====================================================================*
  *                   Copyright (C) 2011 Paul Mineiro                   *
  * All rights reserved.                                                *
@@ -40,6 +37,8 @@
  *                                                                     *
  * Contact: Paul Mineiro <paul@mineiro.com>                            *
  *=====================================================================*/
+#ifndef FAST_MATH_H_
+#define FAST_MATH_H_
 
 #include <stdlib.h>
 #include <stdint.h>
