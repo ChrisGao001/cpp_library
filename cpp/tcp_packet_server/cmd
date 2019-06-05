@@ -1,0 +1,3 @@
+g++  tair_cfg_svr.cpp common/easy_helper.cpp packet/packet_factory.cpp -I./ -I./include/easy/ -I./packet -I./common -DEASY_MULTIPLICITY -L./lib -leasy -o tair_server
+
+g++  tair_client.cpp client.cpp  -I./ -I./include/easy/ -I./packet -I./common -DEASY_MULTIPLICITY  -o tair_client
