@@ -54,7 +54,5 @@ int main(int argc, char** argv) {
     }
     cout << endl;
     #endif
-
-
     return 0;
 }
