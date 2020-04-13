@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+    #button{
+        margin-left: 800px;
+    }
+        .users{
+            width:100%;
+            height:70px;
+            margin-bottom: 20px;
+            background-color: antiquewhite;
+        }
+        .users img{
+            float:left;
+            padding-right: 40px;
+        }
+        .users ul{
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="button">click me</button>
+    <div id="users"></div>
+    <script>
+        document.getElementById("button").addEventListener("click",loadUsers);
+                function loadUsers(){
+            var xhr=new XMLHttpRequest();
+            //建立与服务器连接
+            xhr.open("GET","http://192.168.43.245:6432/user",true);
+            //ajax加载方式，并且处理数据
+            xhr.onload=function(){
+                if(this.status==200){
+                	console.log(this.responseText);
+                    var users=JSON.parse(this.responseText);
+                   var output="";
+                   for(var i in users){
+
+                     output+=  `
+                       <div class="users">
+        <img src="${users[i].avatar_url} " width="70px" height="70px" >
+        
+    <ul>
+        <li>id号码：${users[i].id}</li>
+        <li>登录名：${users[i].login}</li>
+    </ul>
+    </div>
+                       `
+                   }
+                   document.getElementById("users").innerHTML=output;
+                }
+            }
+
+            xhr.send();
+        }
+    </script>
+    
+</body>
+</html>
