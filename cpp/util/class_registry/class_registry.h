@@ -164,7 +164,7 @@ typename RegistryTag::BaseClass* ClassRegistry_GetSingleton() {
                                            entry_name_as_string, \
                                            class_name) \
     static ::toft::ClassRegisterer<registry_name##RegistryTag> \
-        TOFT_PP_JOIN(g_object_creator_registry_##class_name, __LINE__)( \
+        TOFT_PP_JOIN(g_object_creator_registry_##class_name, __COUNTER__)( \
             entry_name_as_string, \
             &toft::ClassRegistry_NewObject<base_class_name, class_name>)
 
@@ -173,7 +173,7 @@ typename RegistryTag::BaseClass* ClassRegistry_GetSingleton() {
                                                      entry_name_as_string, \
                                                      class_name) \
     static ::toft::ClassRegisterer<registry_name##RegistryTag> \
-        TOFT_PP_JOIN(g_object_creator_registry_##class_name, __LINE__)( \
+        TOFT_PP_JOIN(g_object_creator_registry_##class_name, __COUNTER__)( \
             entry_name_as_string, \
             &::toft::ClassRegistry_GetSingleton<class_name, registry_name##RegistryTag>)
 
