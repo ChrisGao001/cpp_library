@@ -12,16 +12,19 @@ class Dict {
     virtual ~Dict() {}    
     Dict() {}
     virtual std::string Name() { return "Base";}
+    virtual int Compute(int a, int b) { return (a+b);}
 };
 
 class TFDict : public Dict {
   public:
     virtual std::string Name() { return "TFDict";}
+    virtual int Compute(int a, int b) { return (a-b);}
 };
 
 class TorchDict : public Dict {
   public:
     virtual std::string Name() { return "TorchDict";}
+    virtual int Compute(int a, int b) { return (a*b);}
 };
 
 TOFT_CLASS_REGISTRY_DEFINE(DictRegistry, Dict);
@@ -46,8 +49,8 @@ int main(int argc, char** argv) {
     logger("hello world");
     std::string class_name = "TFDict";
     Dict *dict = CREATE_DICT(class_name);
-    logger((dict->Name()));
+    logger(dict->Name() << dict->Compute(2, 3));
     dict = CREATE_DICT("TorchDict");
-    logger((dict->Name()));
+    logger(dict->Name() << dict->Compute(2, 3));
     return 0;
 }

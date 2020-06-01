@@ -136,9 +136,6 @@ typename RegistryTag::BaseClass* ClassRegistry_GetSingleton() {
 // registry_name.
 //
 // This macro should be used in the same namespace as base_class_name.
-#define TOFT_PP_JOIN(X, Y) TOFT_PP_DO_JOIN(X, Y)
-#define TOFT_PP_DO_JOIN(X, Y) TOFT_PP_DO_JOIN2(X, Y)
-#define TOFT_PP_DO_JOIN2(X, Y) X##Y
 
 #define TOFT_CLASS_REGISTRY_DEFINE(registry_name, base_class_name) \
     struct registry_name##RegistryTag: \
@@ -164,7 +161,7 @@ typename RegistryTag::BaseClass* ClassRegistry_GetSingleton() {
                                            entry_name_as_string, \
                                            class_name) \
     static ::toft::ClassRegisterer<registry_name##RegistryTag> \
-        TOFT_PP_JOIN(g_object_creator_registry_##class_name, __COUNTER__)( \
+        g_object_creator_registry_##class_name##__COUNTER__( \
             entry_name_as_string, \
             &toft::ClassRegistry_NewObject<base_class_name, class_name>)
 
@@ -173,7 +170,7 @@ typename RegistryTag::BaseClass* ClassRegistry_GetSingleton() {
                                                      entry_name_as_string, \
                                                      class_name) \
     static ::toft::ClassRegisterer<registry_name##RegistryTag> \
-        TOFT_PP_JOIN(g_object_creator_registry_##class_name, __COUNTER__)( \
+        g_object_creator_registry_##class_name##__COUNTER__( \
             entry_name_as_string, \
             &::toft::ClassRegistry_GetSingleton<class_name, registry_name##RegistryTag>)
 
