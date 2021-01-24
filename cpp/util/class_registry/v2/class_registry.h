@@ -7,22 +7,22 @@
 
 namespace plugin {
 
-template <typename KernelType>
-class KernelRegistry {
+template <typename T>
+class Registry {
  public:
-    using KernelFactory = std::function<KernelType*(void)>;
+    using Factory = std::function<T*(void)>;
 
  public:
-    void Register(const std::string& name, KernelFactory factory) {
+    void Register(const std::string& name, Factory factory) {
         factory_map_[name] = factory;
     }
 
-    KernelType* Create(const std::string& name) const {
+    T* Create(const std::string& name) const {
         auto it = factory_map_.find(name);
         return it != factory_map_.end() ? it->second() : nullptr;
     }
 
-    std::vector<std::string> ListKernels() const {
+    std::vector<std::string> ListFactory() const {
         std::vector<std::string> names;
         for (auto& item : factory_map_) {
             names.emplace_back(item.first);
@@ -31,7 +31,7 @@ class KernelRegistry {
     }
 
  private:
-    std::map<std::string, KernelFactory> factory_map_;
+    std::map<std::string, Factory> factory_map_;
 };
 
 }  // namespace plugin

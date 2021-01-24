@@ -1,7 +1,7 @@
 #include "dict.h"
 
-KernelRegistry<Dict>* GlobalDictRegistry() {
-    static KernelRegistry<Dict>* kr = new KernelRegistry<Dict>;
+Registry<Dict>* GlobalDictRegistry() {
+    static Registry<Dict>* kr = new Registry<Dict>;
     return kr;
 }
 

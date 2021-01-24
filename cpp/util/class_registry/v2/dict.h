@@ -28,12 +28,12 @@ class TorchDict : public Dict {
     virtual int Compute(int a, int b) { return (a*b);}
 };
 
-KernelRegistry<Dict>* GlobalDictRegistry();
+Registry<Dict>* GlobalDictRegistry();
 
 class RegistryHelper {
  public:
     RegistryHelper(const std::string& name,
-                   KernelRegistry<Dict>::KernelFactory factory) {
+                   Registry<Dict>::Factory factory) {
         GlobalDictRegistry()->Register(name, factory);
     }
 };
