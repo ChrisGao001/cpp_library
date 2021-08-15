@@ -19,6 +19,9 @@ reload(sys)
 sys.setdefaultencoding("utf8")
 
 #for python3
+def make_sure(bool_val, error_msg, *args):
+    if not bool_val:
+        raise ValueError("make_sure failure: " + error_msg % args)
 
 def shell_v3(cmd):
 	import subprocess
